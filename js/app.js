@@ -5,6 +5,8 @@ const map = L.map('map',{
 
 map.setView([52.00, 19.63], 6.5);
 
+const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoom:9,maxZoom:10,minZoom:6,transparent:true}).addTo(map)
+
 const openStreet=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 20,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -12,7 +14,11 @@ const openStreet=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const beztla = L.tileLayer('',{maxZoom: 20});
 
 const baseMaps = {
- "OpenStreet": openStreet,
- "Brak": beztla};
+ 'OpenStreet': openStreet,
+ 'Brak': beztla};
 
-const layerControl = L.control.layers(baseMaps).addTo(map);
+const overlayMap={
+  'Województwa':wojewodztwa
+}
+
+const layerControl = L.control.layers(baseMaps,overlayMap).addTo(map);
