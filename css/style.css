@@ -10,10 +10,7 @@
 	font-family: Arial, Helvetica, sans-serif;
 		}
 .leaflet-top{
-	top:60px;
-	
-
-	
+	top:60px
 }
 header{
 	position:fixed;
@@ -26,3 +23,43 @@ header{
 	padding: 8px 0px;
 	box-shadow: 4px 0px 12px black;
 }
+
+.search-container{
+	z-index: 1000;
+	top:180px;
+	position:fixed;
+	display:flex;
+	margin-left: 12px;
+}
+
+.search-btn{
+	width:30px;
+	height:84px;
+	background-color: #be1643;
+	color:white;
+	border:none;
+	border-radius:2px;
+	margin-right:4px
+}
+
+.search{
+	background-color: aliceblue;
+	display:none;
+}
+.show{
+	display:block;
+}
+.title{
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.2em;
+	margin:0
+
+}
+.voivodeship-container, .district-container{
+	display:flex;
+	justify-content: space-between;
+ 	width:340px;
+	padding: 4px;
+}
+

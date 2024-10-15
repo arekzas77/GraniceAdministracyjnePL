@@ -10,6 +10,26 @@
 <body>
   <div id="map">
     <header>PODZIAŁ ADMINISTRACYJNY KRAJU</header>
+    <div class="search-container">
+      <button class="search-btn js-search-btn"><span style="writing-Mode: vertical-rl">SZUKAJ</span></button>
+      <form class="search js-search">
+        <p class="title">Wyszukaj granice:</p>
+        <div class="voivodeship-container">
+          <label for="voivodeship">Województwo:</label>
+          <select name="voivodeship" id="js-voivodeship">
+            <option value="">Wybierz województwo</option>
+          </select>
+          <button>Zbliż do</button>
+        </div>
+        <div class="district-container">
+          <label for="district">Powiat:</label>
+          <select name="district" id="js-district">
+            <option value="">Wybierz powiat</option>
+          </select>
+          <button>Zbliż do</button>
+        </div>
+      </form>
+    </div>
   </div>
   <script src="js/leaflet.js"></script>
   <script src="js/app.js"></script>

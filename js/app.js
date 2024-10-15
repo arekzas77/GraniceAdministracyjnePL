@@ -48,3 +48,45 @@ const overlayMap={
 }
 
 const layerControl = L.control.layers(baseMaps,overlayMap).addTo(map);
+
+//Search HTML
+const formEl=document.querySelector('.js-search');
+const searchBtnEl=document.querySelector('.js-search-btn');
+const selectVoivodhipEl= document.querySelector('#js-voivodeship');
+selectVoivodhipEl.addEventListener("change" ,getDistricts);
+searchBtnEl.addEventListener('click',()=>toggleContainer(formEl));
+
+function toggleContainer(container){
+	container.classList.toggle("show")
+}
+
+async function getVoivodship(){
+	const url='GeoJson/wojewodztwa_centroidy.geojson'
+	const response= await fetch(url);
+	const jsonres=await response.json();
+	const voivodshipsArr= jsonres.features.map((item)=>item.properties);
+	const sortedVoiArr=voivodshipsArr.sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
+	let voivodshipOptionsHtml='<option value="">Wybierz województwo</option>';
+	const selectVoivodhipEl= document.querySelector('#js-voivodeship');
+	for(const item of sortedVoiArr){
+		voivodshipOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`
+	}
+	selectVoivodhipEl.innerHTML=voivodshipOptionsHtml;
+}
+getVoivodship();
+
+async function getDistricts(){
+	const url='GeoJson/powiaty_centroidy.geojson'
+	const response=await fetch(url);	
+	const jsonres=await response.json();
+	const districtArr= jsonres.features.map((item)=>item.properties).sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
+	let districtOptionsHtml='<option value="">Wybierz powiat</option>';
+	const selectDistrictEl= document.querySelector('#js-district');
+	const selectedVoivodEl=document.querySelector('#js-voivodeship').value;
+	
+	for(const item of districtArr){
+		item.JPT_WOJ==selectedVoivodEl?districtOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`:null;
+	}
+	selectDistrictEl.innerHTML=districtOptionsHtml;
+}
+
