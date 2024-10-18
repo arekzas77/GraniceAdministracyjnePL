@@ -10,41 +10,61 @@
 	font-family: Arial, Helvetica, sans-serif;
 		}
 .leaflet-top{
-	top:60px
+	top:78px
 }
+.leaflet-left .leaflet-control{
+	margin-left:0px;
+	border-radius:0px;
+	border:none;
+}
+
+/*.leaflet-control-layers{
+	background-color: #0a172b;
+	color:white
+}*/
 header{
 	position:fixed;
 	z-index:1000;
-	background-color: #be1643;
+	background-color:#0a172b;
 	width:100%;
 	text-align:center;
 	color:white;
-	font-size: 28px;
-	padding: 8px 0px;
+	font-size: 30px;
+	padding: 12px 0px;
 	box-shadow: 4px 0px 12px black;
 }
 
+/*header img{
+	position:absolute;
+	height:54px;
+	left:12px;
+	top:6px
+
+}*/
+
 .search-container{
 	z-index: 1000;
-	top:180px;
+	top:196px;
 	position:fixed;
 	display:flex;
-	margin-left: 12px;
 }
 
 .search-btn{
 	width:30px;
-	height:84px;
-	background-color: #be1643;
+	height:110px;
+	background-color: #0a172b;
 	color:white;
 	border:none;
-	border-radius:2px;
-	margin-right:4px
+	margin-right:4px;
+	cursor:pointer
 }
 
 .search{
 	background-color: aliceblue;
 	display:none;
+	box-shadow: 4px 4px 12px black;
+	border-radius: 2px;
+	
 }
 .show{
 	display:block;
@@ -56,7 +76,7 @@ header{
 	margin:0
 
 }
-.voivodeship-container, .district-container{
+.voivodeship-container, .district-container, .community-container{
 	display:flex;
 	justify-content: space-between;
  	width:340px;

@@ -64,11 +64,10 @@ async function getVoivodship(){
 	const url='GeoJson/wojewodztwa_centroidy.geojson'
 	const response= await fetch(url);
 	const jsonres=await response.json();
-	const voivodshipsArr= jsonres.features.map((item)=>item.properties);
-	const sortedVoiArr=voivodshipsArr.sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
+	const voivodshipsArr= jsonres.features.map((item)=>item.properties).sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
 	let voivodshipOptionsHtml='<option value="">Wybierz województwo</option>';
 	const selectVoivodhipEl= document.querySelector('#js-voivodeship');
-	for(const item of sortedVoiArr){
+	for(const item of voivodshipsArr){
 		voivodshipOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`
 	}
 	selectVoivodhipEl.innerHTML=voivodshipOptionsHtml;
