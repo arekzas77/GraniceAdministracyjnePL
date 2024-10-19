@@ -1,6 +1,7 @@
 const map = L.map('map',{
   zoomSnap: 0.5,	
   maxZoom:19,
+	zoomSnap:1,
   zoomControl:false});
 
 map.setView([52.00, 19.63], 6);
@@ -48,11 +49,15 @@ const overlayMap={
 }
 
 const layerControl = L.control.layers(baseMaps,overlayMap).addTo(map);
+map.on("zoom",()=>{let currentzoom = map.getZoom();
+	console.log(currentzoom)})
 
 //Search HTML
 const formEl=document.querySelector('.js-search');
 const searchBtnEl=document.querySelector('.js-search-btn');
 const selectVoivodhipEl= document.querySelector('#js-voivodeship');
+const selectDistrictEl=document.querySelector('#js-district');
+selectDistrictEl.addEventListener('change',getCommunities);
 selectVoivodhipEl.addEventListener("change" ,getDistricts);
 searchBtnEl.addEventListener('click',()=>toggleContainer(formEl));
 
@@ -61,11 +66,12 @@ function toggleContainer(container){
 }
 
 async function getVoivodship(){
+	;
 	const url='GeoJson/wojewodztwa_centroidy.geojson'
 	const response= await fetch(url);
 	const jsonres=await response.json();
 	const voivodshipsArr= jsonres.features.map((item)=>item.properties).sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
-	let voivodshipOptionsHtml='<option value="">Wybierz województwo</option>';
+	let voivodshipOptionsHtml='<option value="initial">Wybierz województwo</option>';
 	const selectVoivodhipEl= document.querySelector('#js-voivodeship');
 	for(const item of voivodshipsArr){
 		voivodshipOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`
@@ -75,17 +81,40 @@ async function getVoivodship(){
 getVoivodship();
 
 async function getDistricts(){
+	const selectDistrictEl= document.querySelector('#js-district');
+	const selectCommunityEl= document.querySelector('#js-community');
+	selectCommunityEl.innerHTML='<option value="initial">Wybierz gmine</option>';
+	selectCommunityEl.disabled=true;
 	const url='GeoJson/powiaty_centroidy.geojson'
 	const response=await fetch(url);	
 	const jsonres=await response.json();
 	const districtArr= jsonres.features.map((item)=>item.properties).sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
-	let districtOptionsHtml='<option value="">Wybierz powiat</option>';
-	const selectDistrictEl= document.querySelector('#js-district');
+	let districtOptionsHtml='<option value="initial">Wybierz powiat</option>';
 	const selectedVoivodEl=document.querySelector('#js-voivodeship').value;
+	
+	
 	
 	for(const item of districtArr){
 		item.JPT_WOJ==selectedVoivodEl?districtOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`:null;
 	}
 	selectDistrictEl.innerHTML=districtOptionsHtml;
+	selectedVoivodEl==='initial'?selectDistrictEl.disabled=true:selectDistrictEl.removeAttribute('disabled');
+}
+
+async function getCommunities(){
+	const url='GeoJson/gminy_centroidy.geojson'
+	const response= await fetch(url);
+	const jsonres=await response.json();
+	const communityArr= jsonres.features.map((item)=>item.properties).sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
+	let communityOptionsHtml='<option value="initial">Wybierz gmine</option>';
+	const selectCommunityEl= document.querySelector('#js-community');
+	const selectedDistrictEl=document.querySelector('#js-district').value;
+	
+
+	for(const item of communityArr){
+		item.JPT_POW==selectedDistrictEl?communityOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`:null;
+	}
+	selectCommunityEl.innerHTML=communityOptionsHtml;
+	selectedDistrictEl==='initial'?selectCommunityEl.disabled=true:selectCommunityEl.removeAttribute('disabled');
 }
 
