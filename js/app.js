@@ -53,20 +53,20 @@ map.on("zoom",()=>{let currentzoom = map.getZoom();
 	console.log(currentzoom)})
 
 //Search HTML
+
 const formEl=document.querySelector('.js-search');
 const searchBtnEl=document.querySelector('.js-search-btn');
 const selectVoivodhipEl= document.querySelector('#js-voivodeship');
 const selectDistrictEl=document.querySelector('#js-district');
 selectDistrictEl.addEventListener('change',getCommunities);
 selectVoivodhipEl.addEventListener("change" ,getDistricts);
-searchBtnEl.addEventListener('click',()=>toggleContainer(formEl));
+searchBtnEl.addEventListener('click',()=>{(layerGeojson)?layerGeojson.remove():null;toggleContainer(formEl)});
 
 function toggleContainer(container){
 	container.classList.toggle("show")
 }
 
 async function getVoivodship(){
-	;
 	const url='GeoJson/wojewodztwa_centroidy.geojson'
 	const response= await fetch(url);
 	const jsonres=await response.json();
@@ -117,4 +117,26 @@ async function getCommunities(){
 	selectCommunityEl.innerHTML=communityOptionsHtml;
 	selectedDistrictEl==='initial'?selectCommunityEl.disabled=true:selectCommunityEl.removeAttribute('disabled');
 }
+
+//get geometries voivodship for markers
+let layerGeojson;
+const btnVoivodeshipEL=document.querySelector('.js-voivodeship-btn');
+btnVoivodeshipEL.addEventListener('click',()=>{event.preventDefault();getGeometryVoivodship()});
+async function getGeometryVoivodship(){
+	(layerGeojson)?layerGeojson.remove():null;
+	let selectedGeometry;
+	const selectedVoivodshipEl=document.querySelector('#js-voivodeship').value;
+	const res=await fetch('GeoJson/wojewodztwa_centroidy.geojson');
+	const resJson=await res.json();
+	for(const element of resJson.features){
+		if(element.properties.JPT_KOD_JE==selectedVoivodshipEl){
+			selectedGeometry=element;
+			break;
+			}
+		}
+		layerGeojson=L.geoJson(selectedGeometry).addTo(map);
+		map.setView(layerGeojson.getBounds().getCenter(),8)
+
+}
+
 
