@@ -136,7 +136,26 @@ async function getGeometryVoivodship(){
 		}
 		layerGeojson=L.geoJson(selectedGeometry).addTo(map);
 		map.setView(layerGeojson.getBounds().getCenter(),8)
+};
 
-}
+//get geometries distroct for markers
+const btnDistrictEl=document.querySelector('.js-district-btn');
+btnDistrictEl.addEventListener('click', ()=>{event.preventDefault();getGeometryDistrict()});
+async function getGeometryDistrict(){
+	(layerGeojson)?layerGeojson.remove():null;
+	let selectedGeometry;
+	const selectedDistrictEl=document.querySelector('#js-district').value;
+	const res=await fetch('GeoJson/powiaty_centroidy.geojson');
+	const resJson=await res.json();
+	for(const element of resJson.features){
+		if(element.properties.JPT_KOD_JE==selectedDistrictEl){
+			selectedGeometry=element;
+			break;
+			}
+		}
+		layerGeojson=L.geoJson(selectedGeometry).addTo(map);
+		map.setView(layerGeojson.getBounds().getCenter(),11)
+};
+
 
 
