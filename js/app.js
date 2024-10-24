@@ -4,7 +4,7 @@ const map = L.map('map',{
 	zoomSnap:1,
   zoomControl:false});
 
-map.setView([52.00, 19.63], 6);
+map.setView([52.50, 19.63], 6);
 
 //Extend ZoomBar - Adbutton "Start map"
 L.Control.MyZoomBar = L.Control.Zoom.extend({
@@ -28,9 +28,9 @@ L.Control.MyZoomBar = L.Control.Zoom.extend({
 	
 map.addControl(new L.Control.MyZoomBar())
 
-
-const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoom:9,maxZoom:11,minZoom:6,transparent:true}).addTo(map);
-const powiaty=L.tileLayer('tiles/powiaty/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:13,minZoom:10,transparent:true}).addTo(map);
+const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoom:9,maxZoom:10,minZoom:6,transparent:true}).addTo(map);
+const powiaty=L.tileLayer('tiles/powiaty/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:12,minZoom:10,transparent:true}).addTo(map);
+const gminy=L.tileLayer('tiles/gminy/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:14,minZoom:12,transparent:true}).addTo(map);
 
 const openStreet=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 20,
@@ -43,9 +43,9 @@ const baseMaps = {
  'Brak': beztla};
 
 const overlayMap={
-  
-  'Powiaty':powiaty,
-  'Województwa':wojewodztwa
+	'Województwa':wojewodztwa,  
+	'Powiaty':powiaty,
+	'Gminy':gminy	
 }
 
 const layerControl = L.control.layers(baseMaps,overlayMap).addTo(map);
