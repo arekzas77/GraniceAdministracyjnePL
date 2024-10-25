@@ -30,7 +30,7 @@ map.addControl(new L.Control.MyZoomBar())
 
 const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoom:9,maxZoom:10,minZoom:6,transparent:true}).addTo(map);
 const powiaty=L.tileLayer('tiles/powiaty/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:12,minZoom:10,transparent:true}).addTo(map);
-const gminy=L.tileLayer('tiles/gminy/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:14,minZoom:12,transparent:true}).addTo(map);
+const gminy=L.tileLayer('tiles/gminy/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:14,minZoom:11,transparent:true}).addTo(map);
 
 const openStreet=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 20,
@@ -138,7 +138,7 @@ async function getGeometryVoivodship(){
 		map.setView(layerGeojson.getBounds().getCenter(),8)
 };
 
-//get geometries distroct for markers
+//get geometries district for markers
 const btnDistrictEl=document.querySelector('.js-district-btn');
 btnDistrictEl.addEventListener('click', ()=>{event.preventDefault();getGeometryDistrict()});
 async function getGeometryDistrict(){
@@ -157,5 +157,23 @@ async function getGeometryDistrict(){
 		map.setView(layerGeojson.getBounds().getCenter(),11)
 };
 
+//get geometries communities for markers
+const btnCommunityEl=document.querySelector('.js-community-btn');
+btnCommunityEl.addEventListener('click', ()=>{event.preventDefault();getGeometryCommunity()});
+async function getGeometryCommunity(){
+	(layerGeojson)?layerGeojson.remove():null;
+	let selectedGeometry;
+	const selectedDistrictEl=document.querySelector('#js-community').value;
+	const res=await fetch('GeoJson/gminy_centroidy.geojson');
+	const resJson=await res.json();
+	for(const element of resJson.features){
+		if(element.properties.JPT_KOD_JE==selectedDistrictEl){
+			selectedGeometry=element;
+			break;
+			}
+		}
+		layerGeojson=L.geoJson(selectedGeometry).bindPopup(`<b>Gmina:</b> ${selectedGeometry.properties.JPT_NAZWA_}`).addTo(map);
+		map.setView(layerGeojson.getBounds().getCenter(),12)
+};
 
 
