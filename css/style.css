@@ -83,3 +83,12 @@ header{
 	padding: 4px;
 }
 
+@media (max-width: 720px){
+	header{
+	font-size: 18px;}
+	.leaflet-top{
+		top:62px
+	}
+
+}
+
