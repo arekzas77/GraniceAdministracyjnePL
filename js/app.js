@@ -43,14 +43,16 @@ const baseMaps = {
  'Brak': beztla};
 
 const overlayMap={
-	'Województwa':wojewodztwa,  
-	'Powiaty':powiaty,
-	'Gminy':gminy	
+	"<img src='css/images/woj_legend.png' align=top style='margin-right:4px'>Województwa":wojewodztwa,  
+	"<img src='css/images/pow_legend.png' align=top style='margin-right:4px'>Powiaty":powiaty,
+	"<img src='css/images/gm_legend.png' align=top style='margin-right:4px'>Gminy":gminy	
 }
 
 const layerControl = L.control.layers(baseMaps,overlayMap).addTo(map);
 map.on("zoom",()=>{let currentzoom = map.getZoom();
-	console.log(currentzoom)})
+	console.log(currentzoom)});
+
+getVoivodship();
 
 //Search HTML
 
@@ -78,7 +80,7 @@ async function getVoivodship(){
 	}
 	selectVoivodhipEl.innerHTML=voivodshipOptionsHtml;
 }
-getVoivodship();
+
 
 async function getDistricts(){
 	const selectDistrictEl= document.querySelector('#js-district');
@@ -91,9 +93,6 @@ async function getDistricts(){
 	const districtArr= jsonres.features.map((item)=>item.properties).sort((a,b)=>a.JPT_NAZWA_>b.JPT_NAZWA_);
 	let districtOptionsHtml='<option value="initial">Wybierz powiat</option>';
 	const selectedVoivodEl=document.querySelector('#js-voivodeship').value;
-	
-	
-	
 	for(const item of districtArr){
 		item.JPT_WOJ==selectedVoivodEl?districtOptionsHtml+=`<option value="${item.JPT_KOD_JE}">${item.JPT_NAZWA_}</option>`:null;
 	}
