@@ -43,9 +43,9 @@ const baseMaps = {
  'Brak': beztla};
 
 const overlayMap={
-	"<img src='css/images/woj_legend.png' align=top style='margin-right:4px'>Województwa":wojewodztwa,  
-	"<img src='css/images/pow_legend.png' align=top style='margin-right:4px'>Powiaty":powiaty,
-	"<img src='css/images/gm_legend.png' align=top style='margin-right:4px'>Gminy":gminy	
+	"<img src='css/images/woj_legend.png' align=top style='margin:0px 4px 0px 0px'>Województwa":wojewodztwa,  
+	"<img src='css/images/pow_legend.png' align=top style='margin:2px 4px 2px 0px'>Powiaty":powiaty,
+	"<img src='css/images/gm_legend.png' align=top style='margin:2px 4px 2px 0px'>Gminy":gminy	
 }
 
 const layerControl = L.control.layers(baseMaps,overlayMap).addTo(map);
@@ -153,7 +153,7 @@ async function getGeometryDistrict(){
 			}
 		}
 		layerGeojson=L.geoJson(selectedGeometry).addTo(map);
-		map.setView(layerGeojson.getBounds().getCenter(),11)
+		map.setView(layerGeojson.getBounds().getCenter(),10)
 };
 
 //get geometries communities for markers

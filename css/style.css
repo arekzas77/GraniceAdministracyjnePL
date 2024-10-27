@@ -48,15 +48,33 @@ header{
 	position:fixed;
 	display:flex;
 }
+select, .search-container{
+	font-size: 15px;
+}
 
 .search-btn{
 	width:30px;
-	height:110px;
+	height:126px;
 	background-color: #0a172b;
 	color:white;
 	border:none;
 	margin-right:4px;
 	cursor:pointer
+}
+.search-container button{
+ border:none;
+ background-color:  #0a172b;
+ color:white;
+ padding:0px 6px;
+ border-radius: 2px;
+ cursor:pointer
+}
+
+button:hover{
+	background-color: #1a4484;
+}
+button:active{
+	transform: scale(0.9);
 }
 
 .search{
@@ -64,6 +82,7 @@ header{
 	display:none;
 	box-shadow: 4px 4px 12px black;
 	border-radius: 2px;
+	padding: 2px;
 	
 }
 .show{
