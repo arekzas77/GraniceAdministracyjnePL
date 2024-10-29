@@ -26,7 +26,8 @@ L.Control.MyZoomBar = L.Control.Zoom.extend({
     }
 });
 	
-map.addControl(new L.Control.MyZoomBar())
+map.addControl(new L.Control.MyZoomBar());
+L.control.scale({imperial:false}).addTo(map);
 
 const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoom:9,maxZoom:10,minZoom:6,transparent:true}).addTo(map);
 const powiaty=L.tileLayer('tiles/powiaty/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:12,minZoom:10,transparent:true}).addTo(map);
@@ -133,7 +134,7 @@ async function getGeometryVoivodship(){
 			break;
 			}
 		}
-		layerGeojson=L.geoJson(selectedGeometry).addTo(map);
+		layerGeojson=L.geoJson(selectedGeometry).bindPopup(`<b>Województwo</b>: ${selectedGeometry.properties.JPT_NAZWA_}`).addTo(map);
 		map.setView(layerGeojson.getBounds().getCenter(),8)
 };
 
@@ -152,7 +153,7 @@ async function getGeometryDistrict(){
 			break;
 			}
 		}
-		layerGeojson=L.geoJson(selectedGeometry).addTo(map);
+		layerGeojson=L.geoJson(selectedGeometry).bindPopup(`<b>Powiat: </b>${selectedGeometry.properties.JPT_NAZWA_}`).addTo(map);
 		map.setView(layerGeojson.getBounds().getCenter(),10)
 };
 
