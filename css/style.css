@@ -76,9 +76,7 @@ select, .search-container{
  cursor:pointer
 }
 
-button:hover{
-	background-color: #1a4484;
-}
+
 button:active{
 	transform: scale(0.9);
 }

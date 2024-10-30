@@ -33,6 +33,16 @@ const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoo
 const powiaty=L.tileLayer('tiles/powiaty/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:12,minZoom:10,transparent:true}).addTo(map);
 const gminy=L.tileLayer('tiles/gminy/{z}/{x}/{y}.png',{maxNativeZoom:11,maxZoom:14,minZoom:11,transparent:true}).addTo(map);
 
+const googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+	maxZoom: 20,
+	subdomains:['mt0','mt1','mt2','mt3'],
+	attribution: '&copy; <a href="https://www.google.com/intl/pl_pl/help/terms_maps/">Dane mapy Google 2024</a>'
+	});			
+const googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+	maxZoom: 22,
+	subdomains:['mt0','mt1','mt2','mt3'],
+	attribution: '&copy; <a href="https://www.google.com/intl/pl_pl/help/terms_maps/">Dane mapy Google 2024</a>'
+	});
 const openStreet=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 20,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -40,8 +50,10 @@ const openStreet=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const beztla = L.tileLayer('',{maxZoom: 20});
 
 const baseMaps = {
- 'OpenStreet': openStreet,
- 'Brak': beztla};
+	'Google zdjęcia':googleHybrid,
+	'Google mapa':googleStreets,
+ 	'OpenStreet': openStreet,
+ 	'Brak': beztla};
 
 const overlayMap={
 	"<img src='css/images/woj_legend.png' align=top style='margin:0px 4px 0px 0px'>Województwa":wojewodztwa,  
