@@ -67,6 +67,30 @@ map.on("zoom",()=>{let currentzoom = map.getZoom();
 
 getVoivodship();
 
+//Popup for gminy GeoJson
+let layerGeojsonGminy;
+async function renderGminyGeoJson() {
+  const url = 'GeoJson/gminy_labels.geojson';
+  const response = await fetch(url);
+  const gminy = await response.json();
+  layerGeojsonGminy=L.geoJson(gminy,{
+		onEachFeature: function(feature,layer){
+			layer.on("mouseover",()=>addTextToDiv(`<b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</span></b>`))
+			layer.on("mouseout",()=>{const markerPlace = document.querySelector(".info-marker-position"); markerPlace.style.visibility='hidden'})
+			layer.bindPopup(`<b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</b>`)
+		},	
+		style: {color:"transparent",opacity:0}
+}).addTo(map);} 
+renderGminyGeoJson();
+
+//hover gmina => attributes in div
+
+function addTextToDiv(text) {
+  const markerPlace = document.querySelector(".info-marker-position");
+	markerPlace.style.visibility='visible';
+  markerPlace.innerHTML = text;
+}
+
 //Search HTML
 
 const formEl=document.querySelector('.js-search');
