@@ -21,6 +21,9 @@
 .leaflet-control-layers-toggle, .leaflet-control-layers-expanded, .leaflet-control-layers {
 	box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.7) !important ;
 }
+.leaflet-popup-content{
+	font-size:1.3em
+}
 
 
 
