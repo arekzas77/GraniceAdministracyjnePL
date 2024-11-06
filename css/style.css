@@ -40,13 +40,13 @@ header{
 	box-shadow: 4px 0px 12px black;
 }
 
-/*header img{
+header img{
 	position:absolute;
-	height:50px;
+	height:46px;
 	right:42px;
-	top:8px
+	top:10px
 
-}*/
+}
 
 .search-container{
 	z-index: 1000;
@@ -122,9 +122,14 @@ button:active{
 
 @media (max-width: 720px){
 	header{
-	font-size: 18px;}
+	font-size: 18px;	
+}
 	.leaflet-top{
 		top:62px
+	}
+	header img{
+		display:none
+		
 	}
 
 	.info-marker-position{
