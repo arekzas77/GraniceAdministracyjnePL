@@ -4,6 +4,7 @@
   <li>Vector data as tiles and GeoJson (without MapServer/Geoserver</li>
 </ul>
 <h2>Thanks:</h2>
-https://leafletjs.com/
+<p>https://leafletjs.com/</p>
+<p>https://github.com/ptma/Leaflet.Measure</p>
 <h2>Demo:</h2>
 https://arekzas77.github.io/GraniceAdministracyjnePL/
