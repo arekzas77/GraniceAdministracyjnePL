@@ -27,6 +27,7 @@ L.Control.MyZoomBar = L.Control.Zoom.extend({
 });
 	
 map.addControl(new L.Control.MyZoomBar());
+L.control.measure().addTo(map);//pomiar odleglosci powierzchni
 L.control.scale({imperial:false}).addTo(map);
 
 const wojewodztwa= L.tileLayer('tiles/wojewodztwa/{z}/{x}/{y}.png',{maxNativeZoom:9,maxZoom:10,minZoom:6,transparent:true}).addTo(map);
