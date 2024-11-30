@@ -28,7 +28,9 @@
     text-align: right;
     list-style: none;
     list-style-image: none;
-    box-shadow: 2px 2px 10px black;
+    box-sizing: border-box;
+    
+    
     
 }
 .leaflet-control-measure a.start {

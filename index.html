@@ -39,9 +39,22 @@
       </form>
     </div>
     <div class="info-marker-position js-info-marker-position"></div>
+    <div class="marker-position js-marker-position">
+      <div class="wgs84"><span style="font-weight:700">WGS 84	</span><span style="font-weight:700">X: </span>49.518626<span style="font-weight:700"> Y: </span>23.238273</div>
+      <div class="pozostaleUklady">
+          <select name="" class="wybierzUklad js-wybierzUklad">
+              <option value="PUWG1992">PUWG 1992</option>
+              <option value="2000s6">PUWG 2000s6</option>
+              <option value="2000s7">PUWG 2000s7</option>
+              <option value="1965s1">PUWG 1965s1</option>
+          </select>
+          <div class="pozostaleWSP">806630.70, 192098.85</div>   
+      </div>
+    </div>
   </div>
   <script src="js/leaflet.js"></script>
   <script src="js/leaflet.measure.js"></script>
+  <script src="js/proj4-compressed.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

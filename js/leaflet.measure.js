@@ -92,7 +92,6 @@
             }
         },
         _enableMeasureLine: function (ev) {
-            
             L.DomEvent.stopPropagation(ev);
             L.DomEvent.preventDefault(ev);
             this._measureHandler = new L.MeasureAction(this._map, {
@@ -205,7 +204,7 @@
         enableClose: function () {
             this._closeButton = L.DomUtil.create("span", "close", this._container);
             this._closeButton.innerHTML =
-                '<svg class="icon" viewBox="0 0 40 40"><path stroke="#FF0000" stroke-width="3" d="M 10,10 L 30,30 M 30,10 L 10,30" /></svg>';
+                '<svg class="icon" viewBox="0 0 50 50"><path stroke="#FF0000" stroke-width="7" d="M 10,10 L 40,40 M 40,10 L 10,40" /></svg>';
             return this._closeButton;
         },
     });
@@ -272,7 +271,7 @@
             }
         },
         _enableMeasure: function () {
-            var map = this._map;
+            var map = this._map;             
             this._trail = {
                 points: [],
                 overlays: L.featureGroup(),

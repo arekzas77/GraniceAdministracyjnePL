@@ -25,6 +25,10 @@
 	font-size:1.3em
 }
 
+.content, .icon{
+	font-size: 0.9rem;
+	
+}
 
 
 /*.leaflet-control-layers{
@@ -120,7 +124,39 @@ button:active{
 	width:210px;
 	font-size:14px;
 	border: 2px rgb(192, 189, 189) solid;
-	border-radius:2px
+	border-radius:2px;
+	box-shadow: 0px 0px 12px 2px black;
+}
+
+.marker-position {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	bottom: 5px;
+	right: 50%;
+	transform: translateX(50%);
+	z-index: 900;
+	padding: 5px;
+	border: solid 2px rgba(0,0,0,.2);
+	border-radius: 2px;
+	font-size: 12px;
+	color: #333333;
+	font-weight: 500;
+	background: rgba(240, 248, 255, 0.614);
+	box-shadow: 2px 2px 12px  black;
+}
+.pozostaleUklady{
+	margin:0 5px;
+	display:flex;
+	justify-content: center;
+	border: 1px solid rgba(0,0,0,.2);
+}
+.wybierzUklad{
+	border:none;
+	font-size: 11px;
+	font-weight:700;
+	background:transparent;
+	cursor:pointer;	
 }
 
 @media (max-width: 720px){
@@ -137,6 +173,10 @@ button:active{
 
 	.info-marker-position{
 		display:none
+	}
+
+	.marker-position{
+		display: none
 	}
 
 }

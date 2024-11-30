@@ -213,4 +213,33 @@ async function getGeometryCommunity(){
 		map.setView(layerGeojson.getBounds().getCenter(),12)
 };
 
+//support for coordinate systems
+map.on("mousemove", function (e) {
+	const markerPlaceWGS84 = document.querySelector(".wgs84");
+	const markerPlacePozostale = document.querySelector(".pozostaleWSP");
+	const crs1992proj = "+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+	let crs1992 = proj4(crs1992proj, [e.latlng.lng, e.latlng.lat]);
+	const crs2000s6proj = "+proj=tmerc +lat_0=0 +lon_0=18 +k=0.999923 +x_0=6500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+	let crs2000s6 = proj4(crs2000s6proj, [e.latlng.lng, e.latlng.lat]);
+	const crs2000s7proj = "+proj=tmerc +lat_0=0 +lon_0=21 +k=0.999923 +x_0=7500000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+	let crs2000s7 = proj4(crs2000s7proj, [e.latlng.lng, e.latlng.lat]);
+	const crs1965s1proj = "+proj=sterea +lat_0=50.625 +lon_0=21.08333333333333 +k=0.9998 +x_0=4637000 +y_0=5467000 +ellps=krass +towgs84=33.4,-146.6,-76.3,-0.359,-0.053,0.844,-0.84 +units=m +no_defs";
+	let crs1965s1 = proj4(crs1965s1proj, [e.latlng.lng, e.latlng.lat]);
+	let x = e.latlng.lat;
+	let y = e.latlng.lng;
+	let selectedUkladEl = document.querySelector(".js-wybierzUklad").value;
+	if (selectedUkladEl == 'PUWG1992') {
+		markerPlacePozostale.innerHTML = crs1992[0].toFixed(2) + ', ' + crs1992[1].toFixed(2)
+	}
+	else if (selectedUkladEl == '2000s6') {
+		markerPlacePozostale.innerHTML = crs2000s6[0].toFixed(2) + ',  ' + crs2000s6[1].toFixed(2)
+	}
+	else if (selectedUkladEl == '2000s7') {
+		markerPlacePozostale.innerHTML = crs2000s7[0].toFixed(2) + ',  ' + crs2000s7[1].toFixed(2)
+	}
+	else if (selectedUkladEl == '1965s1') {
+		markerPlacePozostale.innerHTML = crs1965s1[0].toFixed(2) + ',  ' + crs1965s1[1].toFixed(2)
+	}
+	markerPlaceWGS84.innerHTML = '<span style="font-weight:700">WGS 84	</span>' + '<span style="font-weight:700">X: </span>' + x.toFixed(6) + '<span style="font-weight:700"> Y: </span>' + y.toFixed(6)})
+
 
