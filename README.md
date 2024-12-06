@@ -7,5 +7,6 @@
 <p>https://leafletjs.com/ - JavaScript library for interactive maps</p>
 <p>https://github.com/ptma/Leaflet.Measure - measure tools</p>
 <p>https://github.com/proj4js/proj4js - support for coordinate systems</p>
+<p>https://github.com/stefanocudini/leaflet-search)- Control Search</p>
 <h2>Demo:</h2>
 https://arekzas77.github.io/GraniceAdministracyjnePL/
