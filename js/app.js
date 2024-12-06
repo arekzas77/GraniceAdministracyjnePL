@@ -243,3 +243,42 @@ map.on("mousemove", function (e) {
 	markerPlaceWGS84.innerHTML = '<span style="font-weight:700">WGS 84	</span>' + '<span style="font-weight:700">X: </span>' + x.toFixed(6) + '<span style="font-weight:700"> Y: </span>' + y.toFixed(6)})
 
 
+//Control Search for gminy
+const initialGmina={
+	"type": "FeatureCollection",
+	"name": "gminy",
+	"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+	"features": [
+{ "type": "Feature", "properties": { "JPT_NAZWA_": "W trakcie realizacji..." }, "geometry": { "type": "Point", "coordinates": [ 19.48489, 50.304294 ] } },
+	]
+};
+const testGmina= new L.geoJson(initialGmina);
+
+/*function nowylayer(){
+	let selectElObrebWFS=document.querySelector("#obreby").value.substring(0,13);
+	console.log(selectElObrebWFS);
+	document.getElementById("searchtext16").placeholder="Ładuję listę działek...";
+	let urlWFSDzialki=`http://192.168.0.65:8080/geoserver/gorzowski_Arek/ows?service=WFS&version=1.0.0&request=GetFeature&CQL_FILTER=idDzialki%20LIKE%20%27${selectElObrebWFS}%25%27&typeName=gorzowski_Arek%3Adzialki_etykiety&outputFormat=application%2Fjson&srsName=epsg:4326`;
+	console.log(urlWFSDzialki);
+		$.getJSON(urlWFSDzialki)
+		.then((res)=>{
+			console.log(res);
+		let layerWFSDzialki=L.geoJson(res);
+		controlSearch.setLayer(layerWFSDzialki)})
+		.then(()=>{
+		document.getElementById("searchtext16").placeholder="Wyszukaj działkę";})
+		.then(()=>{document.getElementById("searchtext16").disabled = false;})
+			};*/
+
+const controlSearch= new L.Control.Search({
+	layer: testGmina,
+	collapsed: false,
+	initial: false,
+	hideMarkerOnCollapse: true,
+	container:"js-search",
+	textPlaceholder: "W trakcie realizacji...",
+	propertyName: 'JPT_NAZWA_'});
+	map.addControl(controlSearch);
+		
+	//document.getElementById("searchtext16").disabled = true;
+				

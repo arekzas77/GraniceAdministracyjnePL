@@ -67,7 +67,7 @@ select, .search-container{
 
 .search-btn{
 	width:30px;
-	height:126px;
+	height:166px;
 	background-color: #0a172b;
 	color:white;
 	border:none;
@@ -98,7 +98,8 @@ button:active{
 	
 }
 .show{
-	display:block;
+	display:flex;
+	flex-direction: column;
 }
 .title{
 	font-weight: bold;
