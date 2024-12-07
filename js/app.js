@@ -69,19 +69,21 @@ map.on("zoom",()=>{let currentzoom = map.getZoom();
 getVoivodship();
 
 //Popup for gminy GeoJson
-let layerGeojsonGminy;
+
 async function renderGminyGeoJson() {
   const url = 'GeoJson/gminy_labels.geojson';
   const response = await fetch(url);
   const gminy = await response.json();
-  layerGeojsonGminy=L.geoJson(gminy,{
+  const layerGeojsonGminy=L.geoJson(gminy,{
 		onEachFeature: function(feature,layer){
 			layer.on("mouseover",()=>addTextToDiv(`<b>TERYT: </b>${feature.properties.JPT_KOD_JE}<br><b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</span></b><br><b>Rodzaj:</b> ${feature.properties.RODZAJ}<br>`))
 			layer.on("mouseout",()=>{const markerPlace = document.querySelector(".info-marker-position"); markerPlace.style.visibility='hidden'})
 			layer.bindPopup(`<b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</b></span></b><br><b>Rodzaj:</b> ${feature.properties.RODZAJ}<br><b>TERYT: </b>${feature.properties.JPT_KOD_JE}`)
 		},	
 		style: {color:"transparent",opacity:0}
-}).addTo(map);} 
+	}).addTo(map);
+	putGminyToControlSearch(layerGeojsonGminy)
+} 
 renderGminyGeoJson();
 
 //hover gmina => attributes in div
@@ -254,31 +256,18 @@ const initialGmina={
 };
 const testGmina= new L.geoJson(initialGmina);
 
-/*function nowylayer(){
-	let selectElObrebWFS=document.querySelector("#obreby").value.substring(0,13);
-	console.log(selectElObrebWFS);
-	document.getElementById("searchtext16").placeholder="Ładuję listę działek...";
-	let urlWFSDzialki=`http://192.168.0.65:8080/geoserver/gorzowski_Arek/ows?service=WFS&version=1.0.0&request=GetFeature&CQL_FILTER=idDzialki%20LIKE%20%27${selectElObrebWFS}%25%27&typeName=gorzowski_Arek%3Adzialki_etykiety&outputFormat=application%2Fjson&srsName=epsg:4326`;
-	console.log(urlWFSDzialki);
-		$.getJSON(urlWFSDzialki)
-		.then((res)=>{
-			console.log(res);
-		let layerWFSDzialki=L.geoJson(res);
-		controlSearch.setLayer(layerWFSDzialki)})
-		.then(()=>{
-		document.getElementById("searchtext16").placeholder="Wyszukaj działkę";})
-		.then(()=>{document.getElementById("searchtext16").disabled = false;})
-			};*/
-
-const controlSearch= new L.Control.Search({
-	layer: testGmina,
-	collapsed: false,
-	initial: false,
-	hideMarkerOnCollapse: true,
-	container:"js-search",
-	textPlaceholder: "W trakcie realizacji...",
-	propertyName: 'JPT_NAZWA_'});
+function putGminyToControlSearch(layer){
+	const controlSearch= new L.Control.Search({
+		layer: layer,
+		collapsed: false,
+		initial: false,
+		hideMarkerOnCollapse: true,
+		container:"js-search",
+		textPlaceholder: "W trakcie realizacji...",
+		propertyName: 'JPT_NAZWA_'});
 	map.addControl(controlSearch);
+}
+
 		
 	//document.getElementById("searchtext16").disabled = true;
 				
