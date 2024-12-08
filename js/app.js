@@ -74,6 +74,8 @@ async function renderGminyGeoJson() {
   const url = 'GeoJson/gminy_labels.geojson';
   const response = await fetch(url);
   const gminy = await response.json();
+	gminy.features.forEach((feature)=>{feature.properties['TERYT_GMINA']=`${feature.properties.JPT_KOD_JE} ${feature.properties.JPT_NAZWA_}; ${feature.properties.RODZAJ}`})
+	
   const layerGeojsonGminy=L.geoJson(gminy,{
 		onEachFeature: function(feature,layer){
 			layer.on("mouseover",()=>addTextToDiv(`<b>TERYT: </b>${feature.properties.JPT_KOD_JE}<br><b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</span></b><br><b>Rodzaj:</b> ${feature.properties.RODZAJ}<br>`))
@@ -251,7 +253,7 @@ const initialGmina={
 	"name": "gminy",
 	"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 	"features": [
-{ "type": "Feature", "properties": { "JPT_NAZWA_": "W trakcie realizacji..." }, "geometry": { "type": "Point", "coordinates": [ 19.48489, 50.304294 ] } },
+{ "type": "Feature", "properties": { "JPT_NAZWA_": "Wyszukaj gminę..." }, "geometry": { "type": "Point", "coordinates": [ 19.48489, 50.304294 ] } },
 	]
 };
 const testGmina= new L.geoJson(initialGmina);
@@ -263,8 +265,8 @@ function putGminyToControlSearch(layer){
 		initial: false,
 		hideMarkerOnCollapse: true,
 		container:"js-search",
-		textPlaceholder: "W trakcie realizacji...",
-		propertyName: 'JPT_NAZWA_'});
+		textPlaceholder: "Wyszukaj gminę",
+		propertyName: 'TERYT_GMINA'});
 	map.addControl(controlSearch);
 }
 

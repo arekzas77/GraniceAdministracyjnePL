@@ -67,7 +67,7 @@ select, .search-container{
 
 .search-btn{
 	width:30px;
-	height:166px;
+	height:168px;
 	background-color: #0a172b;
 	color:white;
 	border:none;
@@ -75,9 +75,9 @@ select, .search-container{
 	cursor:pointer;
 	box-shadow: 2px 2px 10px black;
 }
-.search-container button{
+.search button{
  border:none;
- background-color:  #0a172b;
+ background-color:  #2a3d5b;
  color:white;
  padding:0px 6px;
  border-radius: 2px;
@@ -90,7 +90,7 @@ button:active{
 }
 
 .search{
-	background-color: aliceblue;
+	background-image: linear-gradient(to bottom right, aliceblue, #83888e);
 	display:none;
 	box-shadow: 4px 4px 12px black;
 	border-radius: 2px;

@@ -68,7 +68,7 @@
       buildTip: null, // function to return row tip html node(or html string), receive text tooltip in first param
       container: '', // container id to insert Search Control
       zoom: 12, // default zoom level for move to location
-      minLength: 1, // minimal text length for autocomplete
+      minLength: 3, // minimal text length for autocomplete
       initial: true, // search elements only by initial text
       casesensitive: false, // search elements in case sensitive text
       autoType: true, // complete input with first suggested result and select this filled-in text.
