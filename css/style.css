@@ -29,6 +29,9 @@
 	font-size: 0.9rem;
 	
 }
+.leaflet-control-layers label{
+	font-size: 1.3em;
+}
 
 
 /*.leaflet-control-layers{
