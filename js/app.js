@@ -79,7 +79,7 @@ async function renderGminyGeoJson() {
   const layerGeojsonGminy=L.geoJson(gminy,{
 		onEachFeature: function(feature,layer){
 			layer.on("mouseover",()=>addTextToDiv(`<b>TERYT: </b>${feature.properties.JPT_KOD_JE}<br><b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</span></b><br><b>Rodzaj:</b> ${feature.properties.RODZAJ}<br>`))
-			layer.on("mouseout",()=>{const markerPlace = document.querySelector(".info-marker-position"); markerPlace.style.visibility='hidden'})
+			layer.on("mouseout",()=>{const markerPlace = document.querySelector(".info-marker-position"); markerPlace.style.display='none'})
 			layer.bindPopup(`<b>Województwo:</b> ${feature.properties.WOJ_NAME}<br><b>Powiat:</b> ${feature.properties.POW_NAME}<br><b>Gmina: <span style='color:red'>${feature.properties.JPT_NAZWA_}</b></span></b><br><b>Rodzaj:</b> ${feature.properties.RODZAJ}<br><b>TERYT: </b>${feature.properties.JPT_KOD_JE}`)
 		},	
 		style: {color:"transparent",opacity:0}
@@ -92,8 +92,9 @@ renderGminyGeoJson();
 
 function addTextToDiv(text) {
   const markerPlace = document.querySelector(".info-marker-position");
-	markerPlace.style.visibility='visible';
-  markerPlace.innerHTML = text;
+	if(map.getZoom()>9){markerPlace.style.display='block';
+  markerPlace.innerHTML = text;}
+	else{markerPlace.style.display='none'}
 }
 
 //Search HTML
