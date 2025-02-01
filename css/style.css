@@ -114,8 +114,8 @@ button:active{
 .voivodeship-container, .district-container, .community-container{
 	display:flex;
 	justify-content: space-between;
- 	width:340px;
 	padding: 4px;
+	min-width:280px
 }
 
 .info-marker-position{
