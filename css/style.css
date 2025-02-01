@@ -130,6 +130,7 @@ button:active{
 	border: 2px rgb(192, 189, 189) solid;
 	border-radius:2px;
 	box-shadow: 0px 0px 12px 2px black;
+	display:none;
 }
 
 .marker-position {
